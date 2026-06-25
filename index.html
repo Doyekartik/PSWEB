@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PanicSafe | Download</title>
+  <meta name="description" content="Download PanicSafe, a personal safety web app for emergency alerts, check-ins, and trusted contact updates.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #101114;
+      --muted: #626975;
+      --line: rgba(16, 17, 20, 0.12);
+      --surface: #ffffff;
+      --glass: rgba(255, 255, 255, 0.62);
+      --glass-strong: rgba(255, 255, 255, 0.82);
+      --danger: #f04452;
+      --danger-dark: #be2431;
+      --cyan: #68e5ff;
+      --green: #8df0c2;
+      --radius: 28px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: #ffffff;
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      min-height: 100vh;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      column-gap: 10px;
+      row-gap: 8px;
+      min-height: 72px;
+      padding: 0 42px;
+      background: rgba(255, 255, 255, 0.72);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(22px) saturate(145%);
+    }
+
+    .mark {
+      display: inline-grid;
+      place-items: center;
+      width: 18px;
+      height: 28px;
+      justify-self: start;
+      overflow: visible;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .mark img {
+      width: auto;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .brand {
+      justify-self: start;
+      font-family: "Lora", Georgia, serif;
+      font-size: clamp(1.2rem, 2.4vw, 1.55rem);
+      font-weight: 500;
+      letter-spacing: 0;
+      line-height: 1;
+    }
+
+    .brand-word {
+      font-family: "Lora", Georgia, serif;
+      font-weight: 600;
+    }
+
+    .nav {
+      justify-self: end;
+      display: flex;
+      align-items: center;
+      gap: clamp(18px, 3vw, 34px);
+      font-size: clamp(1rem, 2vw, 1.35rem);
+    }
+
+    .nav a {
+      border-bottom: 2px solid transparent;
+      padding: 8px 0;
+    }
+
+    .nav a:hover {
+      border-color: var(--danger);
+    }
+
+    main {
+      width: min(1480px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      display: grid;
+      gap: 28px;
+      justify-items: center;
+      padding: 28px 0 52px;
+    }
+
+    .trailer {
+      position: relative;
+      overflow: hidden;
+      min-height: min(760px, calc(100vh - 118px));
+      aspect-ratio: 16 / 9;
+      width: 100%;
+      max-width: 1480px;
+      border-radius: 42px;
+      background: transparent;
+      color: white;
+      display: grid;
+      place-items: center;
+      box-shadow: none;
+    }
+
+    .trailer video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 1;
+      z-index: 1;
+    }
+
+    .video-placeholder {
+      max-width: 720px;
+      padding: 32px;
+      text-align: center;
+      z-index: 0;
+    }
+
+    .video-placeholder strong {
+      display: block;
+      font-size: clamp(2rem, 5vw, 4.2rem);
+      font-weight: 500;
+      line-height: 1.12;
+    }
+
+    .video-placeholder span {
+      display: block;
+      margin-top: 16px;
+      color: rgba(255, 255, 255, 0.68);
+      font-size: clamp(1rem, 1.7vw, 1.25rem);
+    }
+
+    .intro {
+      display: grid;
+      grid-template-columns: 0.78fr 1.22fr;
+      gap: clamp(28px, 6vw, 78px);
+      align-items: center;
+      justify-items: center;
+      width: 100%;
+      padding: 12px 32px 0;
+    }
+
+    .phone-stage {
+      min-height: 420px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .phone-mockup {
+      width: min(340px, 78vw);
+      height: auto;
+      display: block;
+      border-radius: 34px;
+      filter: none;
+    }
+
+    .copy {
+      max-width: 760px;
+      justify-self: center;
+      padding: 10px 0 52px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+      color: var(--danger-dark);
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .copy h1 {
+      margin: 0;
+      font-family: "Lora", Georgia, serif;
+      font-size: clamp(2.4rem, 6vw, 5.9rem);
+      line-height: 0.94;
+      letter-spacing: 0;
+    }
+
+    .copy p {
+      margin: 24px auto 0;
+      max-width: 680px;
+      color: var(--muted);
+      font-size: clamp(1rem, 1.55vw, 1.18rem);
+    }
+
+    .actions {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 13px;
+      margin-top: 30px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 48px;
+      padding: 0 22px;
+      border: 1px solid var(--ink);
+      border-radius: var(--radius);
+      font-weight: 800;
+    }
+
+    .button.primary {
+      color: #07080d;
+      background: #fff;
+    }
+
+    .button.secondary {
+      color: var(--ink);
+      background: var(--glass);
+      border-color: var(--line);
+      backdrop-filter: blur(18px) saturate(145%);
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      padding: 32px 0 72px;
+      width: 100%;
+    }
+
+    .feature {
+      min-height: 178px;
+      padding: 26px;
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.44));
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.9),
+        0 24px 52px rgba(16, 17, 20, 0.1);
+      backdrop-filter: blur(24px) saturate(150%);
+    }
+
+    .feature svg {
+      width: 28px;
+      height: 28px;
+      margin-bottom: 18px;
+    }
+
+    .feature h2 {
+      margin: 0 0 8px;
+      font-size: 1.1rem;
+    }
+
+    .feature p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .download-band {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 28px;
+      align-items: center;
+      margin-bottom: 58px;
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.86), rgba(255, 255, 255, 0.5));
+      color: var(--ink);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.92), 0 24px 52px rgba(16, 17, 20, 0.09);
+      backdrop-filter: blur(24px) saturate(150%);
+    }
+
+    .team {
+      width: 100vw;
+      margin: 8px calc(50% - 50vw) 54px;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .team h2 {
+      margin: 0 0 28px;
+      font-family: "Lora", Georgia, serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      line-height: 1;
+    }
+
+    .team-carousel {
+      display: flex;
+      width: max-content;
+      gap: clamp(34px, 6vw, 84px);
+      animation: team-scroll 42s linear infinite;
+      will-change: transform;
+    }
+
+    .team:hover .team-carousel {
+      animation-play-state: paused;
+    }
+
+    .team-track {
+      display: flex;
+      gap: clamp(34px, 6vw, 84px);
+      align-items: flex-start;
+      padding-right: clamp(34px, 6vw, 84px);
+    }
+
+    .credit {
+      flex: 0 0 auto;
+      width: clamp(150px, 15vw, 210px);
+      text-align: center;
+    }
+
+    .credit:nth-child(even) {
+      margin-top: 84px;
+    }
+
+    .credit-image {
+      width: clamp(112px, 12vw, 150px);
+      aspect-ratio: 1;
+      margin: 0 auto 14px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: #000 url("Image2.jpg") center / cover no-repeat;
+    }
+
+    .credit-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+    }
+
+    .credit h3 {
+      margin: 0;
+      font-family: "Lora", Georgia, serif;
+      font-size: clamp(1.24rem, 2.1vw, 1.75rem);
+      line-height: 1.05;
+    }
+
+    .credit p {
+      margin: 4px 0 0;
+      color: #333842;
+      font-size: clamp(0.95rem, 1.45vw, 1.1rem);
+      line-height: 1.2;
+    }
+
+    @keyframes team-scroll {
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    .download-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 12px;
+    }
+
+    .ios-install {
+      position: relative;
+    }
+
+    .ios-install summary {
+      list-style: none;
+      cursor: pointer;
+    }
+
+    .ios-install summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .ios-panel {
+      position: absolute;
+      right: 0;
+      top: calc(100% + 12px);
+      z-index: 10;
+      width: min(360px, calc(100vw - 48px));
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.58));
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.95),
+        0 18px 42px rgba(16, 17, 20, 0.12);
+      backdrop-filter: blur(20px) saturate(150%);
+      text-align: left;
+    }
+
+    .tutorial-pip {
+      display: none;
+      width: 92px;
+      margin: 14px auto 0;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.74);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.95),
+        0 10px 24px rgba(16, 17, 20, 0.1);
+      backdrop-filter: blur(20px) saturate(150%);
+    }
+
+    .ios-install[open] .tutorial-pip {
+      display: block;
+    }
+
+    .tutorial-pip video {
+      display: block;
+      width: 100%;
+      aspect-ratio: 9 / 16;
+      object-fit: cover;
+      background: #000;
+    }
+
+    .pwa-link {
+      display: inline-block;
+      padding: 3px 8px;
+      border: 1px solid rgba(51, 133, 255, 0.18);
+      border-radius: 999px;
+      background: rgba(51, 133, 255, 0.1);
+      color: #1f66d1;
+      font-weight: 700;
+      overflow-wrap: anywhere;
+    }
+
+    .ios-panel h3 {
+      margin: 0 0 10px;
+      font-size: 1.05rem;
+    }
+
+    .ios-panel p {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .ios-panel ol {
+      display: grid;
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .ios-panel li {
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 10px;
+      align-items: center;
+      color: #252932;
+      font-size: 0.94rem;
+    }
+
+    .install-icon {
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.72);
+    }
+
+    .install-icon svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .download-band h2 {
+      margin: 0;
+      font-size: clamp(1.5rem, 3vw, 2.3rem);
+    }
+
+    .download-band p {
+      margin: 6px 0 0;
+      color: var(--muted);
+    }
+
+    .download-band .button {
+      min-width: 188px;
+      border-color: rgba(255, 255, 255, 0.72);
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.74), rgba(255, 255, 255, 0.34));
+      color: var(--ink);
+      white-space: nowrap;
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.94),
+        0 14px 34px rgba(16, 17, 20, 0.08);
+      backdrop-filter: blur(18px) saturate(150%);
+    }
+
+    .download-band .button svg {
+      width: 21px;
+      height: 21px;
+      flex: 0 0 auto;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 24px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.94rem;
+    }
+
+    @media (max-width: 850px) {
+      .topbar {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        gap: 8px;
+        min-height: auto;
+        padding: 14px 20px 10px;
+      }
+
+      .brand {
+        justify-self: center;
+        font-size: 1.35rem;
+      }
+
+      .nav {
+        grid-column: 1 / -1;
+        justify-self: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 18px;
+        padding-bottom: 0;
+        font-size: 0.98rem;
+      }
+
+      .nav a {
+        padding: 4px 0;
+      }
+
+      main {
+        width: calc(100% - 28px);
+      }
+
+      .trailer {
+        border-radius: 26px;
+        min-height: auto;
+        aspect-ratio: 16 / 9;
+      }
+
+      .intro {
+        grid-template-columns: 1fr;
+        padding: 0;
+      }
+
+      .phone-stage {
+        min-height: 390px;
+        order: 2;
+      }
+
+      .copy {
+        padding: 8px 0 10px;
+        text-align: center;
+      }
+
+      .copy p,
+      .actions {
+        margin-left: auto;
+        margin-right: auto;
+        justify-content: center;
+      }
+
+      .features,
+      .download-band {
+        grid-template-columns: 1fr;
+      }
+
+      .download-band .button {
+        width: 100%;
+      }
+
+      .download-actions {
+        justify-content: center;
+      }
+
+      .ios-install,
+      .ios-install summary {
+        width: 100%;
+      }
+
+      .ios-panel {
+        position: static;
+        width: 100%;
+        margin-top: 12px;
+      }
+
+      .tutorial-pip {
+        width: 86px;
+        border-radius: 16px;
+      }
+
+      .team {
+        margin-bottom: 42px;
+      }
+
+      .team-carousel,
+      .team-track {
+        gap: 30px;
+      }
+
+      .credit {
+        width: 138px;
+      }
+
+      .credit:nth-child(even) {
+        margin-top: 58px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .topbar {
+        padding: 12px 14px 9px;
+      }
+
+      .nav {
+        width: 100%;
+        gap: 0;
+        justify-content: space-around;
+        font-size: 0.94rem;
+      }
+
+      .video-placeholder {
+        padding: 22px;
+      }
+
+      .trailer {
+        aspect-ratio: 16 / 9;
+        border-radius: 22px;
+      }
+
+      .button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <a class="brand" href="#home">PanicSafe</a>
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#download">Download</a>
+      </nav>
+    </header>
+
+    <main id="home">
+      <section class="hero" aria-label="PanicSafe download hero">
+        <div class="trailer" aria-label="Video trailer placeholder">
+          <video autoplay muted loop playsinline preload="auto" aria-label="PanicSafe showreel">
+            <source src="PanicSafe%20Showreel.mp4" type="video/mp4">
+          </video>
+          <div class="video-placeholder">
+            <strong><span class="brand-word">PanicSafe</span> showreel</strong>
+            <span>If the video does not play, convert it to MP4 for wider browser support.</span>
+          </div>
+        </div>
+
+        <div class="intro" id="about">
+          <div class="phone-stage" aria-hidden="true">
+            <img class="phone-mockup" src="Image1.jpg" alt="">
+          </div>
+
+          <div class="copy">
+            <div class="eyebrow">Personal safety web app</div>
+            <h1>PanicSafe</h1>
+            <p>
+              <span class="brand-word">PanicSafe</span> helps people act quickly during stressful moments. Send an emergency alert,
+              check in with trusted contacts, and share important safety updates from one simple web app.
+            </p>
+  
+            <div class="actions">
+              <a class="button primary" href="#download">
+                <span>Download <span class="brand-word">PanicSafe</span></span>
+                <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 3v12m0 0 5-5m-5 5-5-5M5 21h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+              </a>
+              <a class="button secondary" href="#home">
+                <span>Watch Showreel</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="m9 7 8 5-8 5V7Z" fill="currentColor"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="team" aria-label="Our Team">
+        <h2>Our Team</h2>
+        <div class="team-carousel">
+          <div class="team-track">
+            <article class="credit"><div class="credit-image"><img src="Image2.jpg" alt=""></div><h3>Kartik Doye</h3><p>UI/UX Design</p></article>
+            <article class="credit"><div class="credit-image"><img src="Image2.jpg" alt=""></div><h3>Kartik Doye</h3><p>App Concept</p></article>
+            <article class="credit"><div class="credit-image"><img src="Image2.jpg" alt=""></div><h3>Kartik Doye</h3><p>Frontend Design</p></article>
+            <article class="credit"><div class="credit-image"><img src="Image2.jpg" alt=""></div><h3>Kartik Doye</h3><p>Mobile Interface</p></article>
+            <article class="credit"><div class="credit-image"><img src="Image2.jpg" alt=""></div><h3>Kartik Doye</h3><p>Brand Identity</p></article>
+            <article class="credit"><div class="credit-image"><img src="Image2.jpg" alt=""></div><h3>Kartik Doye</h3><p>Product Strategy</p></article>
+            <article class="credit"><div class="credit-image"><img src="Image2.jpg" alt=""></div><h3>Kartik Doye</h3><p>User Research</p></article>
+            <article class="credit"><div class="credit-image"><img src="Image2.jpg" alt=""></div><h3>Kartik Doye</h3><p>Wireframing</p></article>
+            <article class="credit"><div class="credit-image"><img src="Image2.jpg" alt=""></div><h3>Kartik Doye</h3><p>Prototyping</p></article>
+            <article class="credit"><div class="credit-image"><img src="Image2.jpg" alt=""></div><h3>Kartik Doye</h3><p>Interaction Design</p></article>
+            <article class="credit"><div class="credit-image"><img src="Image2.jpg" alt=""></div><h3>Kartik Doye</h3><p>Visual Design</p></article>
+            <article class="credit"><div class="credit-image"><img src="Image2.jpg" alt=""></div><h3>Kartik Doye</h3><p>Accessibility</p></article>
+            <article class="credit"><div class="credit-image"><img src="Image2.jpg" alt=""></div><h3>Kartik Doye</h3><p>Safety Flows</p></article>
+            <article class="credit"><div class="credit-image"><img src="Image2.jpg" alt=""></div><h3>Kartik Doye</h3><p>Emergency UX</p></article>
+            <article class="credit"><div class="credit-image"><img src="Image2.jpg" alt=""></div><h3>Kartik Doye</h3><p>Android Build</p></article>
+            <article class="credit"><div class="credit-image"><img src="Image2.jpg" alt=""></div><h3>Kartik Doye</h3><p>iOS Planning</p></article>
+            <article class="credit"><div class="credit-image"><img src="Image2.jpg" alt=""></div><h3>Kartik Doye</h3><p>Testing</p></article>
+            <article class="credit"><div class="credit-image"><img src="Image2.jpg" alt=""></div><h3>Kartik Doye</h3><p>Content Writing</p></article>
+            <article class="credit"><div class="credit-image"><img src="Image2.jpg" alt=""></div><h3>Kartik Doye</h3><p>Launch Design</p></article>
+            <article class="credit"><div class="credit-image"><img src="Image2.jpg" alt=""></div><h3>Kartik Doye</h3><p>Project Lead</p></article>
+          </div>
+          <div class="team-track" aria-hidden="true">
+            <article class="credit"><div class="credit-image"><img src="Image2.jpg" alt=""></div><h3>Kartik Doye</h3><p>UI/UX Design</p></article>
+            <article class="credit"><div class="credit-image"><img src="Image2.jpg" alt=""></div><h3>Kartik Doye</h3><p>App Concept</p></article>
+            <article class="credit"><div class="credit-image"><img src="Image2.jpg" alt=""></div><h3>Kartik Doye</h3><p>Frontend Design</p></article>
+            <article class="credit"><div class="credit-image"><img src="Image2.jpg" alt=""></div><h3>Kartik Doye</h3><p>Mobile Interface</p></article>
+            <article class="credit"><div class="credit-image"><img src="Image2.jpg" alt=""></div><h3>Kartik Doye</h3><p>Brand Identity</p></article>
+            <article class="credit"><div class="credit-image"><img src="Image2.jpg" alt=""></div><h3>Kartik Doye</h3><p>Product Strategy</p></article>
+            <article class="credit"><div class="credit-image"><img src="Image2.jpg" alt=""></div><h3>Kartik Doye</h3><p>User Research</p></article>
+            <article class="credit"><div class="credit-image"><img src="Image2.jpg" alt=""></div><h3>Kartik Doye</h3><p>Wireframing</p></article>
+            <article class="credit"><div class="credit-image"><img src="Image2.jpg" alt=""></div><h3>Kartik Doye</h3><p>Prototyping</p></article>
+            <article class="credit"><div class="credit-image"><img src="Image2.jpg" alt=""></div><h3>Kartik Doye</h3><p>Interaction Design</p></article>
+            <article class="credit"><div class="credit-image"><img src="Image2.jpg" alt=""></div><h3>Kartik Doye</h3><p>Visual Design</p></article>
+            <article class="credit"><div class="credit-image"><img src="Image2.jpg" alt=""></div><h3>Kartik Doye</h3><p>Accessibility</p></article>
+            <article class="credit"><div class="credit-image"><img src="Image2.jpg" alt=""></div><h3>Kartik Doye</h3><p>Safety Flows</p></article>
+            <article class="credit"><div class="credit-image"><img src="Image2.jpg" alt=""></div><h3>Kartik Doye</h3><p>Emergency UX</p></article>
+            <article class="credit"><div class="credit-image"><img src="Image2.jpg" alt=""></div><h3>Kartik Doye</h3><p>Android Build</p></article>
+            <article class="credit"><div class="credit-image"><img src="Image2.jpg" alt=""></div><h3>Kartik Doye</h3><p>iOS Planning</p></article>
+            <article class="credit"><div class="credit-image"><img src="Image2.jpg" alt=""></div><h3>Kartik Doye</h3><p>Testing</p></article>
+            <article class="credit"><div class="credit-image"><img src="Image2.jpg" alt=""></div><h3>Kartik Doye</h3><p>Content Writing</p></article>
+            <article class="credit"><div class="credit-image"><img src="Image2.jpg" alt=""></div><h3>Kartik Doye</h3><p>Launch Design</p></article>
+            <article class="credit"><div class="credit-image"><img src="Image2.jpg" alt=""></div><h3>Kartik Doye</h3><p>Project Lead</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="download-band" id="download">
+        <div>
+          <h2>Download <span class="brand-word">PanicSafe</span></h2>
+          <p>Install PanicSafe on your device.</p>
+        </div>
+        <div class="download-actions" aria-label="Platform download options">
+          <details class="ios-install">
+            <summary class="button">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="currentColor" d="M16.6 12.5c0-2.1 1.7-3.1 1.8-3.2-1-1.5-2.6-1.7-3.1-1.7-1.3-.1-2.6.8-3.2.8-.7 0-1.7-.8-2.8-.8-1.4 0-2.8.8-3.5 2.1-1.5 2.5-.4 6.3 1.1 8.4.7 1 1.6 2.2 2.7 2.1 1.1 0 1.5-.7 2.8-.7s1.7.7 2.9.7 2-1 2.7-2.1c.8-1.2 1.2-2.4 1.2-2.5 0-.1-2.6-1-2.6-3.1ZM14.5 6.2c.6-.7 1-1.7.9-2.7-.9 0-1.9.6-2.5 1.3-.6.7-1.1 1.7-.9 2.7.9.1 1.9-.5 2.5-1.3Z"></path>
+              </svg>
+              <span>Install on iOS</span>
+            </summary>
+            <div class="ios-panel">
+              <h3>Add <span class="brand-word">PanicSafe</span> to Home Screen</h3>
+              <p>Open <a class="pwa-link" href="https://panicsafe-safety.vercel.app/">panicsafe-safety.vercel.app</a> in Safari, then follow these steps.</p>
+              <ol>
+                <li>
+                  <span class="install-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M12 15V3m0 0 4 4m-4-4-4 4M6 11H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2h-1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                  </span>
+                  <span>Tap the iOS Share button in Safari.</span>
+                </li>
+                <li>
+                  <span class="install-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <rect x="5" y="5" width="14" height="14" rx="3" fill="none" stroke="currentColor" stroke-width="2"></rect>
+                      <path d="M12 8v8M8 12h8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+                    </svg>
+                  </span>
+                  <span>Choose Add to Home Screen.</span>
+                </li>
+                <li>
+                  <span class="install-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M20 6 9 17l-5-5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                  </span>
+                  <span>Tap Add. <span class="brand-word">PanicSafe</span> will be added to your HomeScreen.</span>
+                </li>
+              </ol>
+            </div>
+            <div class="tutorial-pip" aria-label="iOS home screen tutorial video">
+              <video class="ios-tutorial-video" src="tutorial.mp4" muted loop playsinline controls preload="metadata"></video>
+            </div>
+          </details>
+          <a class="button" href="app-debug.apk" download>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="currentColor" d="M7.2 9.2h9.6v6.8c0 .8-.6 1.4-1.4 1.4h-.8v2.1c0 .6-.5 1.1-1.1 1.1s-1.1-.5-1.1-1.1v-2.1h-.8v2.1c0 .6-.5 1.1-1.1 1.1s-1.1-.5-1.1-1.1v-2.1h-.8c-.8 0-1.4-.6-1.4-1.4V9.2Zm-2.7.2c.6 0 1.1.5 1.1 1.1v4.3c0 .6-.5 1.1-1.1 1.1s-1.1-.5-1.1-1.1v-4.3c0-.6.5-1.1 1.1-1.1Zm15 0c.6 0 1.1.5 1.1 1.1v4.3c0 .6-.5 1.1-1.1 1.1s-1.1-.5-1.1-1.1v-4.3c0-.6.5-1.1 1.1-1.1ZM9.2 4.1l-.9-1.5c-.1-.2 0-.4.1-.5.2-.1.4 0 .5.1l.9 1.5c.7-.3 1.4-.4 2.2-.4s1.5.1 2.2.4l.9-1.5c.1-.2.3-.2.5-.1.2.1.2.3.1.5l-.9 1.5c1.3.8 2.1 2 2.1 3.5H7.1c0-1.5.8-2.7 2.1-3.5Zm1.1 1.6c-.4 0-.7.3-.7.7s.3.7.7.7.7-.3.7-.7-.3-.7-.7-.7Zm3.4 0c-.4 0-.7.3-.7.7s.3.7.7.7.7-.3.7-.7-.3-.7-.7-.7Z"></path>
+            </svg>
+            <span>Install on Android</span>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer></footer>
+  </div>
+  <script>
+    const iosInstall = document.querySelector(".ios-install");
+    const iosTutorialVideo = document.querySelector(".ios-tutorial-video");
+
+    iosInstall?.addEventListener("toggle", async () => {
+      if (!iosTutorialVideo) return;
+
+      if (iosInstall.open) {
+        try {
+          await iosTutorialVideo.play();
+        } catch (error) {
+          iosTutorialVideo.play().catch(() => {});
+        }
+      } else {
+        iosTutorialVideo.pause();
+        iosTutorialVideo.currentTime = 0;
+      }
+    });
+  </script>
+</body>
+</html>
