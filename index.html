@@ -8,7 +8,9 @@
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
-    gtag('config', 'G-7D1048BSWX');
+    gtag('config', 'G-7D1048BSWX', {
+      page_location: 'https://psdownload.vercel.app/'
+    });
   </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -347,10 +349,6 @@
       gap: clamp(34px, 6vw, 84px);
       animation: team-scroll 42s linear infinite;
       will-change: transform;
-    }
-
-    .team:hover .team-carousel {
-      animation-play-state: paused;
     }
 
     .team-track {
@@ -818,7 +816,7 @@
             </summary>
             <div class="ios-panel">
               <h3>Add <span class="brand-word">PanicSafe</span> to Home Screen</h3>
-              <p>Open <a class="pwa-link" href="https://panicsafe-safety.vercel.app/">panicsafe-safety.vercel.app</a> in Safari, then follow these steps.</p>
+              <p>Open <a class="pwa-link" href="https://panicsafe-three.vercel.app/">panicsafe-three.vercel.app</a> in Safari, then follow these steps.</p>
               <ol>
                 <li>
                   <span class="install-icon">
@@ -881,7 +879,8 @@
       trackEvent("ios_install_attempt", {
         event_category: "download",
         event_label: "Install on iOS",
-        pwa_url: "https://panicsafe-safety.vercel.app/"
+        download_site_url: "https://psdownload.vercel.app/",
+        pwa_url: "https://panicsafe-three.vercel.app/"
       });
     });
 
@@ -889,6 +888,7 @@
       trackEvent("android_apk_download", {
         event_category: "download",
         event_label: "PanicSafe.apk",
+        download_site_url: "https://psdownload.vercel.app/",
         file_name: "PanicSafe.apk"
       });
     });
